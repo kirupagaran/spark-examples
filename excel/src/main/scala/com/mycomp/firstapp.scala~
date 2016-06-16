@@ -1,0 +1,35 @@
+/* SimpleApp.scala */
+
+import org.apache.spark.SparkContext
+
+import org.apache.spark.SparkContext._
+
+import org.apache.spark.SparkConf
+
+import java.util.Date
+
+ 
+
+object SimpleApp {
+
+  def main(args: Array[String]) {
+
+    val logFile = "/home/cloudera/kirupa/spark/sample.txt" // Should be some file on your hdfs
+
+    val conf = new SparkConf().setAppName("First Application")
+
+    val sc = new SparkContext(conf)
+
+    val logData = sc.textFile(logFile, 2).cache()
+
+    val numAs = logData.filter(line => line.contains("a"))
+
+    val dateObj = new Date()
+    
+    val dateInfo = dateObj.getSeconds
+
+    numAs.saveAsTextFile("/home/cloudera/kirupa/spark/sample_"+dateInfo);
+
+  }
+
+}
