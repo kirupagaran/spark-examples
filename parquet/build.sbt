@@ -1,6 +1,6 @@
 import AssemblyKeys._
 
-name := "Parquet"
+name := “Parquet-Read-Write”
 
 version := "1.0"
 
